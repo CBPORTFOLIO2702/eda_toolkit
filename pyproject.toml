@@ -1,0 +1,19 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "eda_toolkit"
+version = "0.1.0"
+description = "Simple EDA to be performed for regression and classification tasks"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "scikit-learn >= 1.9.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["eda_toolkit/packages"]
