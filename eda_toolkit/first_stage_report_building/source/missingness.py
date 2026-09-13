@@ -3,7 +3,7 @@ import numpy as np
 import scipy
 
 def validate_date(df, date_col) -> tuple:
-    df[date_col] = pd.datetime(df[date_col], errors = 'coerce')
+    df[date_col] = pd.to_datetime(df[date_col], errors = 'coerce')
     perc_error = float(df.isna().sum()/len(df))
 
     return df, perc_error
