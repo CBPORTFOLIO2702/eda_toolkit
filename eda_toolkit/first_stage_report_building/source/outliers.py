@@ -30,6 +30,6 @@ def check_outliers_in_group(df: pd.DataFrame, target_col: str, group_col: str) -
 
         perc_outliers = check_outliers_overall(df_check, target_col)
         if perc_outliers['percentage_anomalous'] > 0.5:
-            outlier_warnings[(target_col, item)] = perc_outliers['percentage_anomalous']
+            outlier_warnings[str((target_col, item))] = perc_outliers['percentage_anomalous']
 
     return outlier_warnings

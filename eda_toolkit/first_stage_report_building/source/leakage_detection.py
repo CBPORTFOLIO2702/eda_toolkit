@@ -17,13 +17,13 @@ def test_leakage_binary(df: pd.DataFrame, target: str) -> tuple:
             df_masked = df.loc[mask]
             r, p_val = scipy.stats.pointbiserialr(df_masked[target], df_masked[col_other])
             if (abs(r) > 0.9) & (p_val < 0.05):
-                leak_numerical[(target, col_other)] = float(p_val)
+                leak_numerical[str((target, col_other))] = float(p_val)
         else:
             df_masked = df.loc[mask]
             crosstab = pd.crosstab(df_masked[col_other], df_masked[target])
             p_val = scipy.stats.chi2_contingency(crosstab)[1]
             if p_val < 0.05:
-                leak_categorical[(target, col_other)] = float(p_val)
+                leak_categorical[str((target, col_other))] = float(p_val)
 
     return leak_numerical, leak_categorical
 
@@ -38,7 +38,7 @@ def test_leakage_continuous(df:pd.DataFrame, target:str) -> dict:
         elif df[col].dtype in (int, float):
             r = scipy.stats.pearsonr(df.loc[mask][target], df.loc[mask][col]).statistic
             if abs(r) > 0.9:
-                leakage[(target, col)] = float(r)
+                leakage[str((target, col))] = float(r)
 
     return leakage
 
@@ -57,6 +57,6 @@ def quantify_leakage_continuous(df: pd.DataFrame, target: str, suspected_leaks: 
             score = r2_score(df[col], yhat)
 
             if score > 0.9:
-                leakage[(target, col)] = float(score)
+                leakage[str((target, col))] = float(score)
 
     return leakage
