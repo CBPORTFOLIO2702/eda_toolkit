@@ -55,7 +55,7 @@ jobs:
           volume_path = f'/Volumes/workspace/ds_cb_wheels/wheels'
 
           with open(wheel_path, 'rb') as f:
-              w.files.upload(file_path=f'{volume_path}/{wheel_path}', contents=f.read(), overwrite=True)
+              w.files.upload(file_path=f'{volume_path}/{wheel_path}', contents=f, overwrite=True)
 
           print(f'Uploaded {wheel_name} to {volume_path}')
           "
