@@ -54,17 +54,6 @@ jobs:
           wheel_name = wheel_path.split('/')[-1]
           volume_path = f'/Volumes/workspace/ds_cb_wheels/wheels'
 
-          try:
-            w.volumes.read(name = volume_path)
-            print('Volume found')
-          except:
-            w.volumes.create(
-              name = 'wheels',
-              schema_name = 'ds_cb_wheels',
-              catalog_name = 'workspace',
-              volume_type = catalog.VolumeType.MANAGED
-            )
-
           with open(wheel_path, 'rb') as f:
               w.files.upload(file_path=f'{volume_path}/{wheel_path}', contents=f.read(), overwrite=True)
 
