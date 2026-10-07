@@ -36,3 +36,26 @@ jobs:
         with:
           name: python-wheel
           path: dist/*.whl # Uploads all .whl files found in the dist/ directory
+
+      - name: Upload wheel to Databricks volume
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        run: |
+          python -c "
+          from databricks.sdk import WorkspaceClient
+          import glob
+
+          w = WorkspaceClient()
+
+          wheel_path = glob.glob('dist/*.whl')[0]
+          wheel_name = wheel_path.split('/')[-1]
+          volume_path = f'/Volumes/workspace/ds_cb_wheels/wheels/{wheel_name}'
+
+          try
+
+          with open(wheel_path, 'rb') as f:
+              w.files.upload(file_path=volume_path, contents=f.read(), overwrite=True)
+
+          print(f'Uploaded {wheel_name} to {volume_path}')
+          "
