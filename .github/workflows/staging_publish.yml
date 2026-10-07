@@ -51,7 +51,7 @@ jobs:
 
           wheel_path = glob.glob('dist/*.whl')[0]
           wheel_name = wheel_path.split('/')[-1]
-          volume_path = f'/Volumes/workspace/ds_cb_wheels/wheels
+          volume_path = f'/Volumes/workspace/ds_cb_wheels/wheels'
 
           try:
             w.volumes.read(name = volume_path)
