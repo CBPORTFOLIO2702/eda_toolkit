@@ -61,7 +61,7 @@ jobs:
             w.volumes.create(
               name = 'wheels',
               schema_name = 'ds_cb_wheels',
-              catalog = 'workspace',
+              catalog_name = 'workspace',
               volume_type = catalog.VolumeType.MANAGED
             )
 
