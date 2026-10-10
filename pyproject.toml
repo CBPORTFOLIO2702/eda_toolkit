@@ -16,4 +16,4 @@ dependencies = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["eda_toolkit/packages"]
+packages = ["eda_toolkit"]

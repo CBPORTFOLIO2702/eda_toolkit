@@ -3,11 +3,11 @@ import numpy as np
 import logging
 import json
 
-from packages.first_stage_report_building.source.column_analysis import get_target_distribution, get_class_imbalance
-from packages.first_stage_report_building.source.leakage_detection import test_leakage_continuous, quantify_leakage_continuous, test_leakage_binary
-from packages.first_stage_report_building.source.missingness import test_mar, get_missing_perc, validate_date
-from packages.first_stage_report_building.source.outliers import check_outliers_in_group, check_outliers_overall
-from packages.first_stage_report_building.source.shape_and_dtypes import profile_dtypes, profile_data_shape, get_duplicates
+from eda_toolkit.first_stage_report_building.source.column_analysis import get_target_distribution, get_class_imbalance
+from eda_toolkit.first_stage_report_building.source.leakage_detection import test_leakage_continuous, quantify_leakage_continuous, test_leakage_binary
+from eda_toolkit.first_stage_report_building.source.missingness import test_mar, get_missing_perc, validate_date
+from eda_toolkit.first_stage_report_building.source.outliers import check_outliers_in_group, check_outliers_overall
+from eda_toolkit.first_stage_report_building.source.shape_and_dtypes import profile_dtypes, profile_data_shape, get_duplicates
 
 def build_report_regression(df: pd.DataFrame, target_col:str, date_cols: list = []) -> None:
     report = {}
