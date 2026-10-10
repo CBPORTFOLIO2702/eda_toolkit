@@ -8,6 +8,7 @@ from eda_toolkit.first_stage_report_building.source.leakage_detection import tes
 from eda_toolkit.first_stage_report_building.source.missingness import test_mar, get_missing_perc, validate_date
 from eda_toolkit.first_stage_report_building.source.outliers import check_outliers_in_group, check_outliers_overall
 from eda_toolkit.first_stage_report_building.source.shape_and_dtypes import profile_dtypes, profile_data_shape, get_duplicates
+from eda_toolkit.first_stage_report_building.source.multicolinearity import test_multicollinearity
 
 def build_report_regression(df: pd.DataFrame, target_col:str, date_cols: list = []) -> None:
     report = {}
@@ -72,6 +73,10 @@ def build_report_regression(df: pd.DataFrame, target_col:str, date_cols: list = 
     target_profile['target_distribution'] = get_target_distribution(df, target_col)
 
     report['target_profile'] = target_profile
+
+    multicolinearity = test_multicollinearity(df, numeric_cols, target_col)
+    report['multicolinearity'] = multicolinearity
+
 
     with open('eda_report.json', 'w') as f:
         json.dump(report, f, indent=2)
@@ -144,6 +149,9 @@ def build_report_binary_classification(df: pd.DataFrame, target_col:str, date_co
     target_profile['class_imbalance'] = get_class_imbalance(df, target_col)
 
     report['target_profile'] = target_profile
+
+    multicolinearity = test_multicollinearity(df, numeric_cols, target_col)
+    report['multicolinearity'] = multicolinearity
 
     # Since you've fixed the numpy/tuple-key issues at the source,
     # this should now serialize cleanly without a custom encoder
